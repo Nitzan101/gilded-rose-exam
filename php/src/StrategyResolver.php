@@ -19,7 +19,7 @@ class StrategyResolver
             $item->name === 'Aged Brie'                   => new AgedBrieStrategy(),
             $item->name === 'Sulfuras, Hand of Ragnaros'  => new SulfurasStrategy(),
             str_starts_with($item->name, 'Backstage')     => new BackstagePassStrategy(),
-            $item->name === 'Conjured'                    => new ConjuredStrategy(),
+            str_starts_with($item->name, 'Conjured')      => new ConjuredStrategy(),
             default                                       => new NormalItemStrategy()
         };
     }
