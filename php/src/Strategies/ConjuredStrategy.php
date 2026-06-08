@@ -6,10 +6,10 @@ namespace GildedRose\Strategies;
 
 use GildedRose\Item;
 
-class NormalItemStrategy extends AbstractStrategy
+class ConjuredStrategy extends AbstractStrategy
 {
-    private const DECREASE_NORMAL = 1;
-    private const DECREASE_AFTER_SELL_DATE = 2;
+    private const DECREASE_NORMAL = 2;
+    private const DECREASE_AFTER_SELL_DATE = 4;
 
     protected function applyQualityChange(Item $item): void
     {

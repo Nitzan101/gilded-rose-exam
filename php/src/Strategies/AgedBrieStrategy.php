@@ -13,10 +13,7 @@ class AgedBrieStrategy extends AbstractStrategy
 
     protected function applyQualityChange(Item $item): void
     {
-        $increase = $item->sellIn <= 0
-            ? self::INCREASE_AFTER_SELL_DATE
-            : self::INCREASE_NORMAL;
-
-        $this->increaseQuality($item, $increase);
+        $amount = $this->calculateAmount($item, self::INCREASE_NORMAL, self::INCREASE_AFTER_SELL_DATE);
+        $this->increaseQuality($item, $amount);
     }
 }

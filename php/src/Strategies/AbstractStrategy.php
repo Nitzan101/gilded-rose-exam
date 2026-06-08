@@ -28,4 +28,10 @@ abstract class AbstractStrategy implements UpdateStrategy
     {
         $item->quality = max(self::MIN_QUALITY, $item->quality - $amount);
     }
+
+    protected function calculateAmount(Item $item, int $normalRate, int $afterSellDateRate): int
+    {
+        return $item->sellIn <= 0 ? $afterSellDateRate : 
+                                    $normalRate;
+    }
 }
