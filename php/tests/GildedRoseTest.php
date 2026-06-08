@@ -168,6 +168,40 @@ class GildedRoseTest extends TestCase
         $this->assertSame($maxQuality, $item->quality);  
     }
 
+    // Conjured
+
+    public function testConjuredDecreasesQualityByTwoEachDay(): void
+    {
+        $item = $this->updateItem('Conjured', 10, 20);
+        
+        $this->assertSame(9, $item->sellIn);
+        $this->assertSame(18, $item->quality);    
+    }
+
+    public function testConjuredDegradesTwiceAsFastAfterSellDate(): void
+    {
+        $item = $this->updateItem('Conjured', 0, 20);
+        
+        $this->assertSame(-1, $item->sellIn);
+        $this->assertSame(16, $item->quality);  
+    }
+
+    public function testConjuredQualityNeverGoesNegative(): void
+    {
+        $item = $this->updateItem('Conjured', 3, 1);
+        
+        $this->assertSame(2, $item->sellIn);
+        $this->assertSame(0, $item->quality);  
+    }
+
+    public function testConjuredQualityNeverGoesNegativeWhenDegradingTwiceAsFast(): void
+    {
+        $item = $this->updateItem('Conjured', 0, 3);
+        
+        $this->assertSame(-1, $item->sellIn);
+        $this->assertSame(0, $item->quality);  
+    }
+
     // private functions
 
     private function updateItem(string $name, int $sellIn, int $quality): Item
